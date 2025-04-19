@@ -55,4 +55,4 @@ for FILE in "$OUTPUT_DIR"/*.wav; do
 done
 
 echo "処理が完了しました。"
-exit 0
+read

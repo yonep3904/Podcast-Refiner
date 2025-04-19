@@ -55,4 +55,4 @@ for %%F in ("%OUTPUT_DIR%\*.wav") do (
 
 endlocal
 echo 処理が完了しました。
-exit /b 0
+pause
