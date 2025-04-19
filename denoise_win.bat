@@ -1,5 +1,5 @@
-@echo off
-setlocal
+@REM @echo off
+setlocal enabledelayedexpansion
 
 REM DeepFilterNetのパスを指定
 set "DEEPFILTERNET_PATH=%~dp0bin\deep-filter-0.5.6-x86_64-pc-windows-msvc.exe"
@@ -46,12 +46,13 @@ REM outディレクトリ内のファイルに対して音声処理を実行
 for %%F in ("%OUTPUT_DIR%\*.wav") do (
     echo %%F 音声処理 処理中...
     set "OUTPUT_FILE=%%~dpnF_n+c.wav"
-    ffmpeg -i %%F -af "highpass=f=100, equalizer=f=250:t=q:w=1:g=-3, equalizer=f=1000:t=q:w=1:g=2, acompressor=threshold=-20dB:ratio=3:attack=5:release=50, deesser=i=0.5, loudnorm=I=-16:TP=-2:LRA=11" %OUTPUT_FILE%
+    ffmpeg -i "%%F" -af "highpass=f=100, equalizer=f=250:t=q:w=1:g=-3, equalizer=f=1000:t=q:w=1:g=2, acompressor=threshold=-20dB:ratio=3:attack=5:release=50, deesser=i=0.5, loudnorm=I=-16:TP=-2:LRA=11" "!OUTPUT_FILE!"
     if errorlevel 1 (
         echo %%F 音声処理に失敗しました。
     )
     del %%F
 )
 
+endlocal
 echo 処理が完了しました。
 exit /b 0
