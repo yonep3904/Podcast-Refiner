@@ -9,6 +9,13 @@ mkdir -p "$MODELS_DIR"
 
 curl -L -o "$BIN_DIR/deep-filter-0.5.6-aarch64-apple-darwin" https://github.com/Rikorose/DeepFilterNet/releases/download/v0.5.6/deep-filter-0.5.6-aarch64-apple-darwin
 chmod +x "$BIN_DIR/deep-filter-0.5.6-aarch64-apple-darwin"
+# Check for -a or --all option
+if [[ "$1" == "-a" || "$1" == "--all" ]]; then
+    curl -L -o "$BIN_DIR/deep-filter-0.5.6-armv7-unknown-linux-gnueabihf" https://github.com/Rikorose/DeepFilterNet/releases/download/v0.5.6/deep-filter-0.5.6-armv7-unknown-linux-gnueabihf
+    chmod +x "$BIN_DIR/deep-filter-0.5.6-armv7-unknown-linux-gnueabihf"
+
+    curl -L -o "$BIN_DIR/deep-filter-0.5.6-x86_64-pc-windows-msvc.exe" https://github.com/Rikorose/DeepFilterNet/releases/download/v0.5.6/deep-filter-0.5.6-x86_64-pc-windows-msvc.exe
+fi
 
 curl -o "$MODELS_DIR/DeepFilterNet2_onnx.tar.gz" https://github.com/Rikorose/DeepFilterNet/raw/refs/heads/main/models/DeepFilterNet2_onnx.tar.gz
 curl -o "$MODELS_DIR/DeepFilterNet2_onnx_ll.tar.gz" https://github.com/Rikorose/DeepFilterNet/raw/refs/heads/main/models/DeepFilterNet2_onnx_ll.tar.gz

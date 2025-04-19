@@ -14,6 +14,14 @@ if not exist "%MODELS_DIR%" (
 )
 
 curl -L -o "%INSTALL_DIR%\deep-filter-0.5.6-x86_64-pc-windows-msvc.exe" https://github.com/Rikorose/DeepFilterNet/releases/download/v0.5.6/deep-filter-0.5.6-x86_64-pc-windows-msvc.exe
+@REM Check for -a or --all option
+if "%~1"=="--all" (
+    curl -L -o "%INSTALL_DIR%\deep-filter-0.5.6-aarch64-apple-darwin" https://github.com/Rikorose/DeepFilterNet/releases/download/v0.5.6/deep-filter-0.5.6-aarch64-apple-darwin
+    curl -L -o "%INSTALL_DIR%\deep-filter-0.5.6-armv7-unknown-linux-gnueabihf" https://github.com/Rikorose/DeepFilterNet/releases/download/v0.5.6/deep-filter-0.5.6-armv7-unknown-linux-gnueabihf
+) else if "%~1"=="-a" (
+    curl -L -o "%INSTALL_DIR%\deep-filter-0.5.6-aarch64-apple-darwin" https://github.com/Rikorose/DeepFilterNet/releases/download/v0.5.6/deep-filter-0.5.6-aarch64-apple-darwin
+    curl -L -o "%INSTALL_DIR%\deep-filter-0.5.6-armv7-unknown-linux-gnueabihf" https://github.com/Rikorose/DeepFilterNet/releases/download/v0.5.6/deep-filter-0.5.6-armv7-unknown-linux-gnueabihf
+)
 
 curl -o "%MODELS_DIR%\DeepFilterNet2_onnx.tar.gz" https://github.com/Rikorose/DeepFilterNet/raw/refs/heads/main/models/DeepFilterNet2_onnx.tar.gz
 curl -o "%MODELS_DIR%\DeepFilterNet2_onnx_ll.tar.gz" https://github.com/Rikorose/DeepFilterNet/raw/refs/heads/main/models/DeepFilterNet2_onnx_ll.tar.gz
