@@ -1,5 +1,4 @@
 @echo off
-setlocal
 
 set "SCRIPT=%~dp0.."
 set "INSTALL_DIR=%SCRIPT%\bin"
