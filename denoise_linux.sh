@@ -47,7 +47,7 @@ for FILE in "$OUTPUT_DIR"/*.wav; do
     [ -e "$FILE" ] || continue
     echo "$FILE 音声処理 処理中..."
     OUTPUT_FILE="${FILE%.*}_n+c.wav"
-    ffmpeg -i "$FILE" -af "highpass=f=100, equalizer=f=250:t=q:w=1:g=-3, equalizer=f=1000:t=q:w=1:g=2, acompressor=threshold=-20dB:ratio=3:attack=5:release=50, deesser=i=0.5, loudnorm=I=-16:TP=-2:LRA=11" "$OUTPUT_FILE"
+    ffmpeg -i "$FILE" -af "highpass=f=100, equalizer=f=250:t=q:w=1:g=-3, equalizer=f=1000:t=q:w=1:g=1.5, acompressor=threshold=-20dB:ratio=3:attack=5:release=50, deesser=i=0.5, loudnorm=I=-16:TP=-2.5:LRA=11, volume=0.6, alimiter=limit=0.9" "$OUTPUT_FILE"
     if [ $? -ne 0 ]; then
         echo "$FILE 音声処理に失敗しました。"
     fi
