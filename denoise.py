@@ -62,19 +62,25 @@ def main():
     ffmpeg.add("acompressor", threshold="-20dB", ratio="3", attack="5", release="50")
     ffmpeg.add("deesser", i="0.5")
     ffmpeg.add("loudnorm", I="-16", TP="-1.5", LRA="11")
-    ffmpeg.add("alimiter", limit="0.99")
+    ffmpeg.add("volume", "0.6")
+    ffmpeg.add("alimiter", limit="0.9")
     print(ffmpeg.args_text())
     # ffmpeg.run(input_file, output_file)
 
 class FFmpeg:
+    none = object()
+
     def __init__(self):
         self.processings: list[tuple[str, dict[str, str]]] = []
 
-    def add(self, name: str, **kwargs: dict[str, str]) -> None:
+    def add(self, name: str, value: str = None, **kwargs: dict[str, str]) -> None:
         """
         Add a parameter to the FFmpeg instance.
         """
-        self.processings.append((name, kwargs))
+        if value is not None:
+            self.processings.append((name, {FFmpeg.none: value}))
+        else:
+            self.processings.append((name, kwargs))
 
     def args_text(self) -> str:
         """
@@ -83,6 +89,10 @@ class FFmpeg:
         args = []
 
         for name, params in self.processings:
+            if next(iter(params)) is FFmpeg.none:
+                cmd_text = f"{name}={params[FFmpeg.none]}"
+                args.append(cmd_text)
+                continue
             params_text = ":".join((f"{key}={value}" for key, value in params.items()))
             cmd_text = f"{name}={params_text}" if params_text else f"{name}"
             args.append(cmd_text)
