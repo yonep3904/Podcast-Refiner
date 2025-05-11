@@ -62,7 +62,7 @@ def main():
     ffmpeg.add("acompressor", threshold="-20dB", ratio="3", attack="5", release="50")
     ffmpeg.add("deesser", i="0.5")
     ffmpeg.add("loudnorm", I="-16", TP="-1.5", LRA="11")
-    ffmpeg.add("volume", "0.6")
+    ffmpeg.add("volume", "0.9")
     ffmpeg.add("alimiter", limit="0.9")
     print(ffmpeg.args_text())
     # ffmpeg.run(input_file, output_file)

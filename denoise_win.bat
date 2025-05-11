@@ -46,7 +46,7 @@ REM outディレクトリ内のファイルに対して音声処理を実行
 for %%F in ("%OUTPUT_DIR%\*.wav") do (
     echo %%F 音声処理 処理中...
     set "OUTPUT_FILE=%%~dpnF_n+c.wav"
-    ffmpeg -i "%%F" -af "highpass=f=100, equalizer=f=250:t=q:w=1:g=-3, equalizer=f=1000:t=q:w=1:g=1.5, acompressor=threshold=-20dB:ratio=3:attack=5:release=50, deesser=i=0.5, loudnorm=I=-16:TP=-2.5:LRA=11, volume=0.6, alimiter=limit=0.9" "!OUTPUT_FILE!"
+    ffmpeg -i "%%F" -af "highpass=f=100, equalizer=f=250:t=q:w=1:g=-3, equalizer=f=1000:t=q:w=1:g=1.5, acompressor=threshold=-20dB:ratio=3:attack=5:release=50, deesser=i=0.5, loudnorm=I=-16:TP=-2.5:LRA=11, volume=0.9, alimiter=limit=0.9" "!OUTPUT_FILE!"
     if errorlevel 1 (
         echo %%F 音声処理に失敗しました。
     )
